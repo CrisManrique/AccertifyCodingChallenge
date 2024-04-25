@@ -71,3 +71,5 @@ R
 "src/test/java/WordHandlerTest.java,9/4/945689bdd6eb3592f97dfd1676143dc6087036d4
 `
 0src/main/java/org/accertify/utility/Utility.java,6/1/61d0e8b49814c2ffc7c28683bc37e716b3481e78
+h
+8src/main/java/org/accertify/model/PaginationRequest.java,f/0/f052ce9cfaa91c58e4a12944507fea1abc0107d9

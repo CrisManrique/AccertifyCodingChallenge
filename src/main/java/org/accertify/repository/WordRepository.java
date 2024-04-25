@@ -2,6 +2,7 @@ package org.accertify.repository;
 
 import org.accertify.exceptions.AccertifyRuntimeException;
 import org.accertify.model.InputRequest;
+import org.accertify.model.PaginationRequest;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
@@ -40,16 +41,20 @@ public class WordRepository {
                 .subscribeOn(Schedulers.boundedElastic());
     }
 
-    public Mono<List<Map<String, Object>>> getAllWords() {
+    public Mono<List<Map<String, Object>>> getAllWords(PaginationRequest paginationRequest) {
         return Mono.fromCallable(() -> jdbcTemplate.queryForList(GET_ALL_WORDS))
                 .flatMap(words -> {
                     if(words.isEmpty()) {
                         return Mono.defer(Mono::empty);
                     } else {
-                        return Mono.defer(() -> Mono.just(words));
+                        return Mono.defer(() -> (paginationRequest != null) ? Mono.just(reduceListSize(words, paginationRequest)) : Mono.just(words));
                     }
                 })
                 .subscribeOn(Schedulers.boundedElastic());
+    }
+
+    private List<Map<String, Object>> reduceListSize(List<Map<String, Object>> list, PaginationRequest paginationRequest) {
+        return list.subList(paginationRequest.getRecordFrom(), paginationRequest.getRecordTo()+1);
     }
 
     public Mono<String> deleteWord(InputRequest inputRequest) {

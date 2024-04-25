@@ -1,8 +1,10 @@
 package org.accertify.handler;
 import org.accertify.model.InputRequest;
+import org.accertify.model.PaginationRequest;
 import org.accertify.model.ResponseBody;
 import org.accertify.model.TransformedRequest;
 import org.accertify.repository.WordRepository;
+import org.accertify.utility.Utility;
 import org.accertify.utility.WordChecker;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -28,11 +30,18 @@ public class WordHandler {
                 .flatMap(this::convertDataToResponseBody);
     }
 
-    public Mono<ResponseBody> getAllWords(){
-        return
-                wordRepository.getAllWords()
+    public Mono<ResponseBody> getAllWords(PaginationRequest paginationRequest){
+        if(paginationRequest == null){
+            return wordRepository.getAllWords(paginationRequest)
                 .switchIfEmpty(Mono.error(new Exception("Word is not present in the database")))
-                .flatMap(this::convertDataToResponseBody);
+                    .flatMap(this::convertDataToResponseBody);
+        } else {
+            return Mono.just(paginationRequest)
+                    .flatMap(Utility::validate)
+                    .flatMap(wordRepository::getAllWords)
+                    .switchIfEmpty(Mono.error(new Exception("Word is not present in the database")))
+                    .flatMap(this::convertDataToResponseBody);
+        }
     }
     public Mono<ResponseBody> addWord(InputRequest inputRequest){
         return Mono.just(inputRequest)

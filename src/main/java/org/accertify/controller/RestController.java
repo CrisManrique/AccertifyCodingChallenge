@@ -1,6 +1,7 @@
 package org.accertify.controller;
 
 import org.accertify.model.InputRequest;
+import org.accertify.model.PaginationRequest;
 import org.accertify.model.ResponseBody;
 import org.accertify.handler.WordHandler;
 import org.springframework.context.annotation.ComponentScan;
@@ -31,8 +32,11 @@ public class RestController {
     }
 
     @GetMapping("/listAllWords")
-    public Mono<ResponseBody> getAllWords() {
-        return wordHandler.getAllWords();
+    public Mono<ResponseBody> getAllWords(@RequestBody(required = false) PaginationRequest paginationRequest) {
+        if(paginationRequest == null || (paginationRequest.getRecordFrom() == null && paginationRequest.getRecordTo() == null)) {
+            paginationRequest = null;
+        }
+        return wordHandler.getAllWords(paginationRequest);
     }
 
     @PostMapping("/addWord")

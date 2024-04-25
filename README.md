@@ -24,5 +24,16 @@ All have a request body of
 {
 "word": "ladybug"
 }
+```
+/listAllWords has an optional request body where you can
+type the size or limit the amount of words you receive in the response
+.
+For example
+```java
+{
+    "recordFrom": 1,
+    "recordTo": 5
+}
+```
 
-/listAllWords has no request body or params.
+All endpoints are accessed through postman http://localhost:8080/<endpoint>
