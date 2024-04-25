@@ -1,0 +1,10 @@
+
+‚
+java:S1118":Add a private constructor to hide the implicit public one.(ì¬•¸şÿÿÿÿ8±Ì¼“ñ1J$5fded7c9-d903-4402-8c33-0f4e7d76dea0
+
+java:S1854">Remove this useless assignment to local variable "dictionary".(È±ş®8²Ì¼“ñ1J$3fa66e07-26c8-48ef-9d8c-81374d03b342
+n
+java:S1172
+"+Remove this unused method parameter "word".(Ïñ8²Ì¼“ñ1J$b323f9f1-1b3f-425a-8451-e498e3e0e37b
+r
+java:S1481"/Remove this unused "dictionary" local variable.(È±ş®8³Ì¼“ñ1J$98a76eac-c276-4258-ab19-7d3b6a87284d
