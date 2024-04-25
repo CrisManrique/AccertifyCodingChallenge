@@ -63,3 +63,11 @@ d
 4src/main/java/org/accertify/utility/WordChecker.java,8/0/803b4a129b63840251b0bd7db0261ce0a31103e6
 V
 &src/test/java/handler/HandlerTest.java,c/3/c39d6cec97521abdb1bd53cbf90c11e501894e07
+Z
+*src/test/java/handler/WordHandlerTest.java,2/2/227dfe1004da2a35cd59f316e20dd87cbf474a56
+d
+4src/main/java/org/accertify/model/ErrorResponse.java,a/4/a470cfa0e8f59fa9aa9cf98e5d0dec9a64ea1f70
+R
+"src/test/java/WordHandlerTest.java,9/4/945689bdd6eb3592f97dfd1676143dc6087036d4
+`
+0src/main/java/org/accertify/utility/Utility.java,6/1/61d0e8b49814c2ffc7c28683bc37e716b3481e78

@@ -56,7 +56,7 @@ public class WordRepository {
         return Mono.fromCallable(() -> jdbcTemplate.update(DELETE_WORD, inputRequest.getWord()))
                 .flatMap(rowsDeleted -> {
                     if(rowsDeleted == 0) {
-                        return Mono.defer(() -> Mono.just("No rows were deleted"));
+                        return Mono.defer(() -> Mono.error(new AccertifyRuntimeException("Record not found in database")));
                     }
                     else {
                         return Mono.defer(() -> Mono.just("Deleted " + rowsDeleted + " rows"));

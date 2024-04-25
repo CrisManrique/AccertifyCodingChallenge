@@ -61,9 +61,13 @@ public class RestController {
             throw new ValidationException("Error invalid request body: parameter \"word\" is either null or invalid");
         }
         else{
-            return wordHandler.deleteWord(inputRequest);
+            return wordHandler.findSubWords(inputRequest);
         }
     }
 
-
+//    @ExceptionHandler(Exception.class)
+//    public Mono<String> handleRunTimeException(Exception exception){
+//        return Mono.just(exception.getMessage());
+//    }
 }
+

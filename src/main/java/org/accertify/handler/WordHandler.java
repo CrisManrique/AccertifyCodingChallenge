@@ -29,7 +29,8 @@ public class WordHandler {
     }
 
     public Mono<ResponseBody> getAllWords(){
-        return wordRepository.getAllWords()
+        return
+                wordRepository.getAllWords()
                 .switchIfEmpty(Mono.error(new Exception("Word is not present in the database")))
                 .flatMap(this::convertDataToResponseBody);
     }
@@ -46,13 +47,19 @@ public class WordHandler {
                 .flatMap(wordRepository::deleteWord)
                 .map(i -> new ResponseBody("Successfully deleted record"));
     }
-//
-//    public Mono<ResponseBody> findSubWords(InputRequest inputRequest){
-//        return Mono.just(inputRequest)
-//                .flatMap(this::transformRequest)
-//                .flatMap()
-//                .map(ResponseBody::new);
-//    }
+
+    public Mono<ResponseBody> findSubWords(InputRequest inputRequest){
+        return Mono.just(inputRequest)
+                .flatMap(this::transformRequest)
+                .flatMap(this::convertDataToResponseBody)
+                .map(recordMap -> new ResponseBody(recordMap, "Successfully found sub-words for " + inputRequest.getWord()));
+    }
+
+    private Mono<Map<String, List<String>>> convertDataToResponseBody(TransformedRequest transformedRequest){
+        Map<String, List<String>> recordMap = new HashMap<>();
+        recordMap.put(transformedRequest.getWord(), transformedRequest.getSubWords());
+        return Mono.just(recordMap);
+    }
 
     public Mono<ResponseBody> convertDataToResponseBody(List<Map<String, Object>> recordMap){
          Map<String, List<String>> responseMap = recordMap
