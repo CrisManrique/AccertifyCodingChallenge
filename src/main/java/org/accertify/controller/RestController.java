@@ -1,5 +1,4 @@
 package org.accertify.controller;
-
 import org.accertify.model.InputRequest;
 import org.accertify.model.PaginationRequest;
 import org.accertify.model.ResponseBody;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
-
 
 @ComponentScan("org.accertify")
 @org.springframework.web.bind.annotation.RestController
